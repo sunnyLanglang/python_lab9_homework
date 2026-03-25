@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Расходы на комплектующие</title>
+    <link href="static/style.css" rel="stylesheet">
+    <script type="text/javascript" src="static/script.js"></script>
+</head>
+<body>
+    <h1>Расходы на комплектующие для компьютера</h1>
+
+    <div class="total">Общая сумма: <span id="total">{{ total }}</span> руб.</div>
+
+    <h2>Список трат</h2>
+    <ul id="expenses-list">
+        {% for exp in expenses %}
+        <li>
+            <div class="expense-item">
+                <span class="device">{{ exp.hardware_part }}</span> —
+                <span class="price">{{ exp.price }} руб.</span>
+            </div>
+        </li>
+        {% else %}
+        <li>Нет записей. Добавьте первую трату.</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Добавить новую трату</h2>
+    <form>
+        <div>
+            <input type="text" name="hardware_part" id="hardware_part" required>
+            <label for="hardware_part">Устройство</label>
+        </div>
+        <div>
+            <input type="number" name="price" id="price" required>
+            <label for="price">Стоимость (руб.)</label>
+        </div>
+        <button type="button" onclick="addExpense()">Добавить</button>
+    </form>
+
+    <button type="button" onclick="clearAll()">Очистить всё</button>
+</body>
+</html>
